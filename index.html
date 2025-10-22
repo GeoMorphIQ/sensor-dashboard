@@ -115,20 +115,13 @@
             align-items: center;
         }
 
-        .logo-placeholder {
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #fff;
-            margin-right: 15px;
-            font-size: 24px;
-            border: none;
-        }
+        .logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* This will make your square logo a circle */
+    margin-right: 15px;
+    object-fit: cover;   /* This ensures the logo scales nicely */
+}
         
         header h1 {
             color: #ffffff;
@@ -261,7 +254,7 @@
 <div class="container">
     <header>
         <div class="logo-container">
-            <div class="logo-placeholder"><i class="fas fa-microchip"></i></div>
+            <img src="logo.jpeg" alt="Geomorphiq Logo" class="logo">
             <h1>GeoMorphIq</h1>
         </div>
         <h2>Structural Health Monitor</h2>
