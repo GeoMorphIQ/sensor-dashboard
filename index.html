@@ -98,7 +98,11 @@
         
         .alert p, .warning p { font-size: 2em; }
 
-        .chart-container, .log-container { grid-column: 1 / -1; }
+        .chart-container, .log-container { 
+            grid-column: 1 / -1; 
+            overflow-x: auto;     /* Fixes horizontal scrolling */
+            position: relative;  /* <-- THIS IS THE FIX FOR THE INFINITE GROWING */
+        }
 
         .log-container h3 { margin-top: 0; }
         #log-box {
