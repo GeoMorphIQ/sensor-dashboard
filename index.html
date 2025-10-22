@@ -3,39 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GeoMorphIq - Structural Health Monitor</title>
+    <title>geoMorpgIq - Structural Health Monitor</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- MODIFIED: Red/White (Light) Theme --- */
+        /* --- MODIFIED: Green/Beige (Light) Theme --- */
         :root {
-            --bg-color: #f0f2f5;
+            --bg-color: #f8f5f2; /* Logo's beige background */
             --card-bg-color: rgba(255, 255, 255, 0.7);
-            --text-color: #333333;
-            --heading-color: #d32f2f; /* Strong Red */
+            --text-color: #3d403d; /* Logo's dark grey text */
+            --heading-color: #344e41; /* Logo's main green */
             --shadow-color: rgba(0, 0, 0, 0.1);
             --border-color: #e0e0e0;
             --alert-bg: #fce8e6;
             --alert-border: #d93025;
             --warning-bg: #fff0c7;
             --warning-border: #f9ab00;
-            --success-color: #2e7d32;
+            --success-color: #a7c957; /* Logo's leaf green */
         }
 
-        /* --- MODIFIED: Red/Black (Dark) Theme --- */
+        /* --- MODIFIED: Green/Black (Dark) Theme --- */
         body.dark-mode {
-            --bg-color: #121212;
+            --bg-color: #1a201b; /* Dark, desaturated green */
             --card-bg-color: rgba(30, 30, 30, 0.7);
             --text-color: #e0e0e0;
-            --heading-color: #f44336; /* Brighter Red */
+            --heading-color: #a7c957; /* Brighter leaf green for contrast */
             --shadow-color: rgba(0, 0, 0, 0.4);
             --border-color: #424242;
             --alert-bg: #4d2323;
             --alert-border: #d93025;
             --warning-bg: #524214;
             --warning-border: #f9ab00;
-            --success-color: #81c784;
+            --success-color: #a7c957;
         }
         
         @keyframes background-pan {
@@ -80,15 +80,15 @@
             padding: 20px;
             transition: background-color 0.3s, color 0.3s;
             
-            /* --- MODIFIED: Animated gradient for light theme --- */
-            background: linear-gradient(-45deg, var(--bg-color), #ffcdd2, var(--bg-color), #ffccbc);
+            /* --- MODIFIED: Animated gradient for light theme (green) --- */
+            background: linear-gradient(-45deg, var(--bg-color), #dbece0, var(--bg-color), #e3eedb);
             background-size: 400% 400%;
             animation: background-pan 15s ease infinite;
         }
         
         body.dark-mode {
-             /* --- MODIFIED: Animated gradient for dark theme --- */
-            background: linear-gradient(-45deg, var(--bg-color), #6a0000, var(--bg-color), #4e0000);
+             /* --- MODIFIED: Animated gradient for dark theme (green) --- */
+            background: linear-gradient(-45deg, var(--bg-color), #203624, var(--bg-color), #1a201b);
             background-size: 400% 400%;
             animation: background-pan 15s ease infinite;
         }
@@ -104,8 +104,8 @@
             align-items: center;
             margin-bottom: 20px;
             padding: 15px 25px;
-            /* --- MODIFIED: Header gradient to use red --- */
-            background: linear-gradient(90deg, var(--heading-color) 0%, #b71c1c 100%);
+            /* --- MODIFIED: Header gradient to use green --- */
+            background: linear-gradient(90deg, var(--heading-color) 0%, #588157 100%);
             border-radius: 12px;
             box-shadow: 0 4px 20px var(--shadow-color);
         }
@@ -115,13 +115,14 @@
             align-items: center;
         }
 
+        /* --- THIS IS YOUR LOGO'S STYLE --- */
         .logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%; /* This will make your square logo a circle */
-    margin-right: 15px;
-    object-fit: cover;   /* This ensures the logo scales nicely */
-}
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; /* Makes it a circle. Remove this line if you want it square */
+            margin-right: 15px;
+            object-fit: cover;
+        }
         
         header h1 {
             color: #ffffff;
@@ -141,7 +142,6 @@
         .theme-switch input { display:none; }
         .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; }
         .slider:before { background-color: #fff; bottom: 4px; content: ""; height: 26px; left: 4px; position: absolute; transition: .4s; width: 26px; }
-        /* This now automatically uses the red --heading-color variable */
         input:checked + .slider { background-color: var(--heading-color); }
         input:checked + .slider:before { transform: translateX(26px); }
         .slider.round { border-radius: 34px; }
@@ -168,7 +168,7 @@
         .card:nth-child(3) { animation-delay: 0.1s; }
         .card:nth-child(4) { animation-delay: 0.15s; }
         .card:nth-child(5) { animation-delay: 0.2s; }
-        .card:nth-child(6) { animation-delay: 0.25s; } /* --- MODIFIED: Adjusted animation delay --- */
+        .card:nth-child(6) { animation-delay: 0.25s; }
         .chart-container:nth-of-type(1) { animation-delay: 0.3s; }
         .chart-container:nth-of-type(2) { animation-delay: 0.35s; }
         .log-container { animation-delay: 0.4s; }
@@ -188,13 +188,11 @@
         .card h3 i, .chart-container h3 i, .log-container h3 i {
             margin-right: 12px;
             font-size: 1.1em;
-            /* This now automatically uses the red --heading-color variable */
             color: var(--heading-color);
             width: 20px;
             text-align: center;
         }
 
-        /* This now automatically uses the red --heading-color variable */
         .card p { font-size: 2.5em; font-weight: 700; margin: 0; color: var(--heading-color); }
         .card p .unit { font-size: 0.4em; font-weight: 400; color: var(--text-color); }
         
@@ -206,9 +204,8 @@
         .alert p { color: var(--alert-border); }
         .warning p { color: var(--warning-border); }
         #earthquakeCard:not(.alert) p, #weakBrickCard:not(.warning) p {
-            color: var(--success-color); 
+            color: var(--success-color); /* Uses the new leaf green */
         }
-
 
         .alert { background-color: var(--alert-bg); border-left: 5px solid var(--alert-border); }
         .warning { background-color: var(--warning-bg); border-left: 5px solid var(--warning-border); }
@@ -255,7 +252,7 @@
     <header>
         <div class="logo-container">
             <img src="logo.jpeg" alt="Geomorphiq Logo" class="logo">
-            <h1>GeoMorphIq</h1>
+            <h1>geoMorpgIq</h1>
         </div>
         <h2>Structural Health Monitor</h2>
         <div class="theme-switch-wrapper">
@@ -275,6 +272,7 @@
             <h3><i class="fas fa-tachometer-alt"></i>Stress Level</h3>
             <p><span id="stressLevel">--</span><span class="unit">mV</span></p>
         </div>
+        
         <div class="card">
             <h3><i class="fas fa-thermometer-half"></i>Surface Temp</h3>
             <p><span id="surfaceTemp">--</span><span class="unit">°C</span></p>
@@ -313,7 +311,6 @@
 </div>
 
 <script>
-    // --- NO CHANGES to API URL or Chart Config ---
     const API_URL = 'https://my-brick-project.onrender.com/api/data';
     const MAX_CHART_POINTS = 20;
 
@@ -346,7 +343,7 @@
     const tempCtx = document.getElementById('tempChart').getContext('2d');
     const tempChart = createChart(tempCtx, 'Temperature');
     tempChart.data.datasets.push({ label: 'Surface Temp', borderColor: 'rgba(255, 99, 132, 1)', tension: 0.3, fill: false, data: [] });
-    tempChart.data.datasets.push({ label: 'Inner Temp', borderColor: 'rgba(54, 162, 235, 1)', tension: 0.3, fill: false, data: [] }); // Keeping this blue for contrast
+    tempChart.data.datasets.push({ label: 'Inner Temp', borderColor: 'rgba(54, 162, 235, 1)', tension: 0.3, fill: false, data: [] });
 
     const accelCtx = document.getElementById('accelChart').getContext('2d');
     const accelChart = createChart(accelCtx, 'Acceleration');
@@ -375,12 +372,10 @@
 
             if (!data || Object.keys(data).length === 0) return;
             
-            // --- JAVASCRIPT LINE ADDED HERE ---
             document.getElementById('health').textContent = data.health?.toFixed(1) || '--';
-            document.getElementById('stressLevel').textContent = data.voltage?.toFixed(2) || '--'; // <-- THIS LINE IS NEW
+            document.getElementById('stressLevel').textContent = data.voltage?.toFixed(2) || '--'; 
             document.getElementById('surfaceTemp').textContent = data.surfaceTemp?.toFixed(2) || '--';
             document.getElementById('innerTemp').textContent = data.innerTemp?.toFixed(2) || '--';
-            // --- END OF JAVASCRIPT CHANGE ---
 
             const earthquakeCard = document.getElementById('earthquakeCard');
             const earthquakeAlertP = document.getElementById('earthquakeAlert');
@@ -424,7 +419,6 @@
     const currentTheme = localStorage.getItem('theme');
 
     function applyTheme(theme) {
-        // --- MODIFIED: Added .trim() to fix color parsing errors ---
         const newTextColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
         const newGridColor = getComputedStyle(document.body).getPropertyValue('--border-color').trim();
 
