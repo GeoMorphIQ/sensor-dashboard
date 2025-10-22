@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Green/Beige (Light) Theme --- */
+        /* --- Themes (Unchanged) --- */
         :root {
             --bg-color: #f8f5f2;
             --card-bg-color: rgba(255, 255, 255, 0.7);
@@ -24,8 +24,6 @@
             --warning-border: #f9ab00;
             --success-color: #a7c957;
         }
-
-        /* --- Green/Black (Dark) Theme --- */
         body.dark-mode {
             --bg-color: #1a201b;
             --card-bg-color: rgba(30, 30, 30, 0.7);
@@ -46,23 +44,17 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 var(--alert-border); }
             70% { box-shadow: 0 0 10px 10px rgba(217, 48, 37, 0); }
             100% { box-shadow: 0 0 0 0 rgba(217, 48, 37, 0); }
         }
-        body.dark-mode .pulse.alert {
-            animation: pulse-dark 1.5s infinite;
-        }
-        .pulse.warning {
-            animation: pulse-warning 1.5s infinite;
-        }
+        body.dark-mode .pulse.alert { animation: pulse-dark 1.5s infinite; }
+        .pulse.warning { animation: pulse-warning 1.5s infinite; }
         @keyframes pulse-dark {
             0% { box-shadow: 0 0 0 0 var(--alert-border); }
             70% { box-shadow: 0 0 10px 10px rgba(217, 48, 37, 0.4); }
@@ -74,7 +66,7 @@
             100% { box-shadow: 0 0 0 0 rgba(249, 171, 0, 0); }
         }
 
-        /* --- Body and Container (Unchanged) --- */
+        /* --- Body and Container (Unchanged from previous responsive version) --- */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
@@ -85,78 +77,37 @@
             background: linear-gradient(-45deg, var(--bg-color), #dbece0, var(--bg-color), #e3eedb);
             background-size: 400% 400%;
             animation: background-pan 15s ease infinite;
-            /* Added min-height to ensure it fills viewport */
             min-height: 100vh;
-            box-sizing: border-box; /* Ensures padding doesn't add to width */
+            box-sizing: border-box;
         }
-        
         body.dark-mode {
             background: linear-gradient(-45deg, var(--bg-color), #203624, var(--bg-color), #1a201b);
             background-size: 400% 400%;
             animation: background-pan 15s ease infinite;
         }
-
         .container {
             max-width: 1200px;
             margin: auto;
         }
 
-        /* --- MODIFIED: Header is now responsive --- */
+        /* --- Header (Unchanged from previous responsive version) --- */
         header {
             display: flex;
-            /* flex-wrap: wrap; <-- MODIFIED to wrap items */
-            justify-content: space-between; /* MODIFIED for better wrapping behavior */
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
             padding: 15px 25px;
             background: linear-gradient(90deg, var(--heading-color) 0%, #588157 100%);
             border-radius: 12px;
             box-shadow: 0 4px 20px var(--shadow-color);
-            gap: 15px; /* Adds space when items wrap */
+            gap: 15px;
         }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 15px;
-            object-fit: cover;
-        }
-        
-        header h1 {
-            color: #ffffff;
-            font-weight: 700;
-            margin: 0;
-            font-size: 1.8em; /* Base size */
-        }
-
-        header h2 {
-            color: #f0f2f5;
-            font-weight: 400;
-            font-size: 1.2em; /* Base size */
-            margin: 0;
-            /* Added for wrapping */
-            text-align: center;
-            flex-grow: 1; /* Allows it to take space */
-        }
-        
-        /* --- Header Controls (Unchanged) --- */
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .status-indicator {
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 20px;
-            color: #fff;
-        }
+        .logo-container { display: flex; align-items: center; }
+        .logo { width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; object-fit: cover; }
+        header h1 { color: #ffffff; font-weight: 700; margin: 0; font-size: 1.8em; }
+        header h2 { color: #f0f2f5; font-weight: 400; font-size: 1.2em; margin: 0; text-align: center; flex-grow: 1; }
+        .header-controls { display: flex; align-items: center; gap: 20px; }
+        .status-indicator { font-weight: 600; padding: 8px 16px; border-radius: 20px; color: #fff; }
         .status-indicator.online { background-color: #2e7d32; }
         .status-indicator.offline { background-color: #d32f2f; }
         .theme-switch-wrapper { display: flex; align-items: center; }
@@ -169,16 +120,14 @@
         .slider.round { border-radius: 34px; }
         .slider.round:before { border-radius: 50%; }
 
-        /* --- MODIFIED: Converted from Grid to Flexbox --- */
+        /* --- Flexbox Layout (Unchanged from previous) --- */
         .main-grid {
-            /* display: grid; */
-            /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
-            display: flex;     /* NEW: Using Flexbox as requested */
-            flex-wrap: wrap;   /* NEW: Allowing items to wrap to new lines */
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
         }
 
-        /* --- Card and Container Base Styles (Unchanged) --- */
+        /* --- Card and Container Base (Unchanged) --- */
         .card, .chart-container, .log-container {
             background: var(--card-bg-color);
             padding: 25px;
@@ -189,9 +138,8 @@
             backdrop-filter: blur(10px);
             opacity: 0;
             animation: fadeIn 0.5s ease-out forwards;
-            box-sizing: border-box; /* Ensures padding doesn't break layout */
+            box-sizing: border-box;
         }
-        /* Fade-in animations (Unchanged) */
         .card:nth-child(2) { animation-delay: 0.05s; }
         .card:nth-child(3) { animation-delay: 0.1s; }
         .card:nth-child(4) { animation-delay: 0.15s; }
@@ -200,18 +148,16 @@
         .chart-container:nth-of-type(1) { animation-delay: 0.3s; }
         .chart-container:nth-of-type(2) { animation-delay: 0.35s; }
         .log-container { animation-delay: 0.4s; }
-
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px var(--shadow-color);
         }
-        
         .card h3 { 
             margin-top: 0; 
             font-weight: 600; 
             display: flex;
             align-items: center;
-            word-break: break-word; /* Prevents long titles from overflowing */
+            word-break: break-word;
         }
         .card h3 i, .chart-container h3 i, .log-container h3 i {
             margin-right: 12px;
@@ -220,54 +166,79 @@
             width: 20px;
             text-align: center;
         }
-
         .card p { font-size: 2.5em; font-weight: 700; margin: 0; color: var(--heading-color); }
         .card p .unit { font-size: 0.4em; font-weight: 400; color: var(--text-color); }
-        
-        .card p i {
-            font-size: 0.8em;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
+        .card p i { font-size: 0.8em; margin-right: 10px; vertical-align: middle; }
         .alert p { color: var(--alert-border); }
         .warning p { color: var(--warning-border); }
         #earthquakeCard:not(.alert) p, #weakBrickCard:not(.warning) p {
             color: var(--success-color);
         }
-
         .alert { background-color: var(--alert-bg); border-left: 5px solid var(--alert-border); }
         .warning { background-color: var(--warning-bg); border-left: 5px solid var(--warning-border); }
-        
         .alert p, .warning p { font-size: 2em; }
 
-        /* --- MODIFIED: Sizing for Flexbox children --- */
+        /* --- Flexbox Sizing (Unchanged) --- */
         .card {
-            flex-grow: 1;     /* NEW: Allows cards to grow and fill space */
-            flex-basis: 250px;  /* NEW: Sets a base width, similar to minmax() */
-            min-width: 250px; /* NEW: Prevents cards from getting too small */
+            flex-grow: 1;
+            flex-basis: 250px;
+            min-width: 250px;
         }
-        
         .chart-container {
-            /* grid-column: 1 / -1; <-- REMOVED: Grid-specific */
-            flex-basis: 100%; /* NEW: Makes chart span full width */
+            flex-basis: 100%;
             overflow-x: auto;
             position: relative;
             height: 400px;
         }
-        .chart-container h3, .log-container h3 {
-            display: flex;
-            align-items: center;
-        }
-
+        .chart-container h3 { display: flex; align-items: center; }
         .log-container { 
-            /* grid-column: 1 / -1; <-- REMOVED: Grid-specific */
-            flex-basis: 100%; /* NEW: Makes log span full width */
+            flex-basis: 100%;
             overflow-x: auto;
             position: relative;
         }
 
+        /* --- MODIFIED: Log Container Header --- */
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px; /* Space between header and log box */
+            flex-wrap: wrap; /* Allow button to wrap on very small screens */
+            gap: 10px;
+        }
+
+        .log-header h3 {
+            margin: 0; /* Removed default margin */
+        }
+        
+        /* --- NEW: Clear Log Button Style --- */
+        #clearLogBtn {
+            background-color: var(--alert-border);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: background-color 0.2s, opacity 0.2s;
+        }
+        #clearLogBtn i {
+            margin-right: 5px;
+        }
+        #clearLogBtn:hover {
+            background-color: #a1251c; /* Darker red */
+        }
+        #clearLogBtn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        body.dark-mode #clearLogBtn:hover:not(:disabled) {
+             background-color: #ff4d4d; /* Brighter red for dark mode hover */
+        }
+
         /* --- Log Box (Unchanged) --- */
-        .log-container h3 { margin-top: 0; }
         #log-box {
             height: 200px;
             overflow-y: auto;
@@ -283,68 +254,24 @@
         .log-entry:last-child { border-bottom: none; }
         .log-entry .timestamp { color: #888; font-size: 0.9em; margin-right: 10px; }
 
-
-        /* --- NEW: Responsive Media Queries --- */
+        /* --- Responsive Media Queries (Unchanged) --- */
         @media (max-width: 768px) {
-            body {
-                padding: 10px; /* Reduce padding on mobile */
-            }
-
-            header {
-                flex-direction: column; /* Stack header items vertically */
-                gap: 10px;
-                text-align: center;
-                padding: 15px;
-            }
-
-            .logo-container {
-                justify-content: center; /* Center logo+title */
-            }
-            
-            header h1 {
-                font-size: 1.5em; /* Reduce header font */
-            }
-            
-            header h2 {
-                font-size: 1em; /* Reduce subtitle font */
-            }
-
-            .header-controls {
-                justify-content: center; /* Center the status+switch */
-            }
-
-            /* This was the main cause of "scrumbling" */
-            .card p {
-                font-size: 2em; /* Reduce the big number font */
-            }
-            .alert p, .warning p {
-                font-size: 1.5em; /* Reduce alert fonts */
-            }
-            
-            .chart-container {
-                height: 300px; /* Reduce chart height on mobile */
-            }
+            body { padding: 10px; }
+            header { flex-direction: column; gap: 10px; text-align: center; padding: 15px; }
+            .logo-container { justify-content: center; }
+            header h1 { font-size: 1.5em; }
+            header h2 { font-size: 1em; }
+            .header-controls { justify-content: center; }
+            .card p { font-size: 2em; }
+            .alert p, .warning p { font-size: 1.5em; }
+            .chart-container { height: 300px; }
         }
-
         @media (max-width: 480px) {
-             header h1 {
-                font-size: 1.3em;
-            }
-            header h2 {
-                font-size: 0.9em;
-            }
-            
-            /* Further font reduction for small phones */
-            .card p {
-                font-size: 1.8em;
-            }
-            .alert p, .warning p {
-                font-size: 1.3em;
-            }
-
-            .card h3 {
-                font-size: 1em; /* Reduce card titles */
-            }
+             header h1 { font-size: 1.3em; }
+            header h2 { font-size: 0.9em; }
+            .card p { font-size: 1.8em; }
+            .alert p, .warning p { font-size: 1.3em; }
+            .card h3 { font-size: 1em; }
         }
     </style>
 </head>
@@ -357,7 +284,6 @@
             <h1>GeoMorphIq</h1>
         </div>
         <h2>Structural Health Monitor</h2>
-        
         <div class="header-controls">
             <div id="deviceStatus" class="status-indicator offline">Offline</div>
             <div class="theme-switch-wrapper">
@@ -374,22 +300,18 @@
             <h3><i class="fas fa-heartbeat"></i>Brick Health</h3>
             <p><span id="health">--</span><span class="unit">%</span></p>
         </div>
-
         <div class="card">
             <h3><i class="fas fa-tachometer-alt"></i>Stress Level</h3>
             <p><span id="stressLevel">--</span><span class="unit">mV</span></p>
         </div>
-        
         <div class="card">
             <h3><i class="fas fa-thermometer-half"></i>Surface Temperature</h3>
             <p><span id="surfaceTemp">--</span><span class="unit">°C</span></p>
         </div>
-
         <div class="card">
             <h3><i class="fas fa-thermometer-full"></i>Inner Temperature</h3>
             <p><span id="innerTemp">--</span><span class="unit">°C</span></p>
         </div>
-        
         <div id="earthquakeCard" class="card">
             <h3><i class="fas fa-broadcast-tower"></i>Earthquake Alert</h3>
             <p id="earthquakeAlert">--</p>
@@ -403,14 +325,18 @@
             <h3><i class="fas fa-chart-line"></i>Temperature Readings (°C)</h3>
             <canvas id="tempChart"></canvas>
         </div>
-
         <div class="chart-container">
             <h3><i class="fas fa-wave-square"></i>Accelerometer Readings (g)</h3>
             <canvas id="accelChart"></canvas>
         </div>
 
         <div class="log-container">
-            <h3><i class="fas fa-list-alt"></i>Event Log</h3>
+            <div class="log-header">
+                <h3><i class="fas fa-list-alt"></i>Event Log</h3>
+                <button id="clearLogBtn" title="Clear Event Log">
+                    <i class="fas fa-trash-alt"></i> Clear
+                </button>
+            </div>
             <div id="log-box">
                 </div>
         </div>
@@ -418,49 +344,35 @@
 </div>
 
 <script>
-    // --- ALL JAVASCRIPT IS UNCHANGED ---
-    
     const API_URL = 'https://my-brick-project.onrender.com/api/data';
+    // NEW: Define the (assumed) endpoint for clearing logs
+    const CLEAR_LOGS_API_URL = 'https://my-brick-project.onrender.com/api/clear-logs';
+    
     const MAX_CHART_POINTS = 20;
 
-    // --- Chart setup is unchanged ---
+    // --- Chart setup (Unchanged) ---
     const createChart = (ctx, label) => new Chart(ctx, {
         type: 'line',
-        data: {
-            labels: [],
-            datasets: []
-        },
+        data: { labels: [], datasets: [] },
         options: {
             scales: { 
-                y: { 
-                    beginAtZero: false,
-                    ticks: { color: 'var(--text-color)' },
-                    grid: { color: 'var(--border-color)' }
-                },
-                x: {
-                    ticks: { color: 'var(--text-color)' },
-                    grid: { color: 'var(--border-color)' }
-                }
+                y: { beginAtZero: false, ticks: { color: 'var(--text-color)' }, grid: { color: 'var(--border-color)' } },
+                x: { ticks: { color: 'var(--text-color)' }, grid: { color: 'var(--border-color)' } }
             },
             animation: { duration: 500 },
             maintainAspectRatio: false,
-            plugins: {
-                legend: { labels: { color: 'var(--text-color)' } }
-            }
+            plugins: { legend: { labels: { color: 'var(--text-color)' } } }
         }
     });
-
     const tempCtx = document.getElementById('tempChart').getContext('2d');
     const tempChart = createChart(tempCtx, 'Temperature');
     tempChart.data.datasets.push({ label: 'Surface Temp', borderColor: 'rgba(255, 99, 132, 1)', tension: 0.3, fill: false, data: [] });
     tempChart.data.datasets.push({ label: 'Inner Temp', borderColor: 'rgba(54, 162, 235, 1)', tension: 0.3, fill: false, data: [] });
-
     const accelCtx = document.getElementById('accelChart').getContext('2d');
     const accelChart = createChart(accelCtx, 'Acceleration');
     accelChart.data.datasets.push({ label: 'Accel X', borderColor: 'rgba(255, 206, 86, 1)', tension: 0.3, fill: false, data: [] });
     accelChart.data.datasets.push({ label: 'Accel Y', borderColor: 'rgba(75, 192, 192, 1)', tension: 0.3, fill: false, data: [] });
     accelChart.data.datasets.push({ label: 'Accel Z', borderColor: 'rgba(153, 102, 255, 1)', tension: 0.3, fill: false, data: [] });
-    
     const updateChart = (chart, labels, ...newDatas) => {
         if (chart.data.labels.length > MAX_CHART_POINTS) {
             chart.data.labels.shift();
@@ -471,23 +383,21 @@
         chart.update();
     };
 
-    // --- fetchData function is unchanged ---
+    // --- fetchData function (Unchanged) ---
     async function fetchData() {
         try {
             const response = await fetch(API_URL);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const apiResponse = await response.json();
             
-            // Get all data from the server
             const isOnline = apiResponse.isOnline;
             const data = apiResponse.latestSensorData;
             const logs = apiResponse.eventLog;
 
-            // 1. Update the status indicator
+            // 1. Update status
             const statusIndicator = document.getElementById('deviceStatus');
             const statusIconOffline = '<i class="fas fa-minus-circle"></i> Offline';
             const statusIconDefault = '--';
-            
             if (isOnline) {
                 statusIndicator.textContent = 'Online';
                 statusIndicator.className = 'status-indicator online';
@@ -496,52 +406,41 @@
                 statusIndicator.className = 'status-indicator offline';
             }
 
-            // 2. Update all cards and charts ONLY IF online
+            // 2. Update cards and charts
             if (isOnline && data && Object.keys(data).length > 0) {
-                // Update cards with data
                 document.getElementById('health').textContent = data.health?.toFixed(1) || '--';
                 document.getElementById('stressLevel').textContent = data.voltage?.toFixed(2) || '--'; 
                 document.getElementById('surfaceTemp').textContent = data.surfaceTemp?.toFixed(2) || '--';
                 document.getElementById('innerTemp').textContent = data.innerTemp?.toFixed(2) || '--';
 
-                // Update earthquake alert
                 const earthquakeCard = document.getElementById('earthquakeCard');
                 const earthquakeAlertP = document.getElementById('earthquakeAlert');
-                earthquakeAlertP.innerHTML = data.earthquakeAlert 
-                    ? '<i class="fas fa-exclamation-triangle"></i> YES!' 
-                    : '<i class="fas fa-check-circle"></i> NO';
+                earthquakeAlertP.innerHTML = data.earthquakeAlert ? '<i class="fas fa-exclamation-triangle"></i> YES!' : '<i class="fas fa-check-circle"></i> NO';
                 earthquakeCard.classList.toggle('alert', data.earthquakeAlert);
-                earthquakeCard.classList.toggle('pulse', data.earthquakeAlert); 
+                earthquakeCard.classList.toggle('pulse', data.earthq/akeAlert); 
 
-                // Update weak brick alert
                 const weakBrickCard = document.getElementById('weakBrickCard');
                 const weakBrickWarningP = document.getElementById('weakBrickWarning');
-                weakBrickWarningP.innerHTML = data.weakBrickWarning 
-                    ? '<i class="fas fa-exclamation-circle"></i> YES' 
-                    : '<i class="fas fa-check-circle"></i> NO';
+                weakBrickWarningP.innerHTML = data.weakBrickWarning ? '<i class="fas fa-exclamation-circle"></i> YES' : '<i class="fas fa-check-circle"></i> NO';
                 weakBrickCard.classList.toggle('warning', data.weakBrickWarning);
-                weakBrickCard.classList.toggle('pulse', data.weakBrickWarning); // <-- THE TYPO IS GONE
+                weakBrickCard.classList.toggle('pulse', data.weakBrickWarning);
                 
-                // Update charts with data
                 const timestamp = new Date().toLocaleTimeString();
                 updateChart(tempChart, timestamp, data.surfaceTemp, data.innerTemp);
                 updateChart(accelChart, timestamp, data.accelX, data.accelY, data.accelZ);
             
             } else if (!isOnline) {
-                // Device is OFFLINE. Show no data.
                 document.getElementById('health').textContent = statusIconDefault;
                 document.getElementById('stressLevel').textContent = statusIconDefault; 
                 document.getElementById('surfaceTemp').textContent = statusIconDefault;
                 document.getElementById('innerTemp').textContent = statusIconDefault;
                 document.getElementById('earthquakeAlert').innerHTML = statusIconOffline;
                 document.getElementById('weakBrickWarning').innerHTML = statusIconOffline;
-                
-                // Clear pulsing animations if they were left on
                 document.getElementById('earthquakeCard').classList.remove('alert', 'pulse');
                 document.getElementById('weakBrickCard').classList.remove('warning', 'pulse');
             }
 
-            // 3. Always update the event log (we want to see history)
+            // 3. Update log
             const logBox = document.getElementById('log-box');
             logBox.innerHTML = '';
             if (logs && logs.length > 0) {
@@ -554,25 +453,20 @@
             } else {
                 logBox.innerHTML = '<div class="log-entry">No events recorded.</div>';
             }
-
         } catch (error) {
             console.error('Failed to fetch sensor data:', error);
-            
-            // If fetch fails, also show offline
             const statusIndicator = document.getElementById('deviceStatus');
             statusIndicator.textContent = 'Offline';
             statusIndicator.className = 'status-indicator offline';
         }
     }
 
-    // --- Theme Switcher logic is unchanged ---
+    // --- Theme Switcher (Unchanged) ---
     const themeToggle = document.getElementById('checkbox');
     const currentTheme = localStorage.getItem('theme');
-
     function applyTheme(theme) {
         const newTextColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
         const newGridColor = getComputedStyle(document.body).getPropertyValue('--border-color').trim();
-
         [tempChart, accelChart].forEach(chart => {
             chart.options.scales.y.ticks.color = newTextColor;
             chart.options.scales.y.grid.color = newGridColor;
@@ -582,19 +476,15 @@
             chart.update('none'); 
         });
     }
-
     if (currentTheme) {
         document.body.classList.add(currentTheme);
         if (currentTheme === 'dark-mode') {
             themeToggle.checked = true;
         }
     }
-    
     requestAnimationFrame(() => {
         applyTheme(currentTheme || 'light-mode');
     });
-    
-
     themeToggle.addEventListener('change', () => {
         let theme;
         if (themeToggle.checked) {
@@ -606,12 +496,52 @@
             theme = 'light-mode';
             localStorage.setItem('theme', 'light-mode');
         }
-        
         requestAnimationFrame(() => {
             applyTheme(theme); 
         });
     });
 
+    // --- NEW: Event Listener for Clear Log Button ---
+    const clearLogButton = document.getElementById('clearLogBtn');
+    
+    clearLogButton.addEventListener('click', async () => {
+        // Confirm before deleting
+        if (!confirm('Are you sure you want to permanently delete the entire event log? This cannot be undone.')) {
+            return;
+        }
+
+        try {
+            // Disable button to prevent double-clicks
+            clearLogButton.disabled = true;
+            clearLogButton.innerHTML = 'Clearing...';
+
+            const response = await fetch(CLEAR_LOGS_API_URL, {
+                method: 'DELETE' // Or 'POST' if you set up your backend that way
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Server failed to clear logs: ${errorText}`);
+            }
+            
+            // If successful, immediately clear frontend log
+            document.getElementById('log-box').innerHTML = '<div class="log-entry">Log cleared successfully.</div>';
+            
+            // Re-fetch data to get the now-empty log list from the server
+            await fetchData(); 
+
+        } catch (error) {
+            console.error('Failed to clear logs:', error);
+            alert('Error: Could not clear the event log. Please ensure the backend endpoint is set up correctly.');
+        } finally {
+            // Re-enable button
+            clearLogButton.disabled = false;
+            clearLogButton.innerHTML = '<i class="fas fa-trash-alt"></i> Clear';
+        }
+    });
+
+
+    // --- Interval (Unchanged) ---
     setInterval(fetchData, 2000);
     fetchData(); // Initial fetch
 </script>
