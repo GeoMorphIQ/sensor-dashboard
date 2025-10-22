@@ -8,27 +8,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- MODIFIED: Green/Beige (Light) Theme --- */
+        /* --- Green/Beige (Light) Theme --- */
         :root {
-            --bg-color: #f8f5f2; /* Logo's beige background */
+            --bg-color: #f8f5f2;
             --card-bg-color: rgba(255, 255, 255, 0.7);
-            --text-color: #3d403d; /* Logo's dark grey text */
-            --heading-color: #344e41; /* Logo's main green */
+            --text-color: #3d403d;
+            --heading-color: #344e41;
             --shadow-color: rgba(0, 0, 0, 0.1);
             --border-color: #e0e0e0;
             --alert-bg: #fce8e6;
             --alert-border: #d93025;
             --warning-bg: #fff0c7;
             --warning-border: #f9ab00;
-            --success-color: #a7c957; /* Logo's leaf green */
+            --success-color: #a7c957;
         }
 
-        /* --- MODIFIED: Green/Black (Dark) Theme --- */
+        /* --- Green/Black (Dark) Theme --- */
         body.dark-mode {
-            --bg-color: #1a201b; /* Dark, desaturated green */
+            --bg-color: #1a201b;
             --card-bg-color: rgba(30, 30, 30, 0.7);
             --text-color: #e0e0e0;
-            --heading-color: #a7c957; /* Brighter leaf green for contrast */
+            --heading-color: #a7c957;
             --shadow-color: rgba(0, 0, 0, 0.4);
             --border-color: #424242;
             --alert-bg: #4d2323;
@@ -79,15 +79,12 @@
             margin: 0;
             padding: 20px;
             transition: background-color 0.3s, color 0.3s;
-            
-            /* --- MODIFIED: Animated gradient for light theme (green) --- */
             background: linear-gradient(-45deg, var(--bg-color), #dbece0, var(--bg-color), #e3eedb);
             background-size: 400% 400%;
             animation: background-pan 15s ease infinite;
         }
         
         body.dark-mode {
-             /* --- MODIFIED: Animated gradient for dark theme (green) --- */
             background: linear-gradient(-45deg, var(--bg-color), #203624, var(--bg-color), #1a201b);
             background-size: 400% 400%;
             animation: background-pan 15s ease infinite;
@@ -104,7 +101,6 @@
             align-items: center;
             margin-bottom: 20px;
             padding: 15px 25px;
-            /* --- MODIFIED: Header gradient to use green --- */
             background: linear-gradient(90deg, var(--heading-color) 0%, #588157 100%);
             border-radius: 12px;
             box-shadow: 0 4px 20px var(--shadow-color);
@@ -115,11 +111,10 @@
             align-items: center;
         }
 
-        /* --- THIS IS YOUR LOGO'S STYLE --- */
         .logo {
             width: 50px;
             height: 50px;
-            border-radius: 50%; /* Makes it a circle. Remove this line if you want it square */
+            border-radius: 50%;
             margin-right: 15px;
             object-fit: cover;
         }
@@ -136,6 +131,26 @@
             font-size: 1.2em;
             margin: 0;
         }
+        
+        /* --- NEW: CSS for the status indicator --- */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .status-indicator {
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #fff;
+        }
+        .status-indicator.online {
+            background-color: #2e7d32; /* Green */
+        }
+        .status-indicator.offline {
+            background-color: #d32f2f; /* Red */
+        }
+        /* --- End of new CSS --- */
 
         .theme-switch-wrapper { display: flex; align-items: center; }
         .theme-switch { display: inline-block; height: 34px; position: relative; width: 60px; }
@@ -204,8 +219,9 @@
         .alert p { color: var(--alert-border); }
         .warning p { color: var(--warning-border); }
         #earthquakeCard:not(.alert) p, #weakBrickCard:not(.warning) p {
-            color: var(--success-color); /* Uses the new leaf green */
+            color: var(--success-color);
         }
+
 
         .alert { background-color: var(--alert-bg); border-left: 5px solid var(--alert-border); }
         .warning { background-color: var(--warning-bg); border-left: 5px solid var(--warning-border); }
@@ -255,13 +271,18 @@
             <h1>GeoMorphIq</h1>
         </div>
         <h2>Structural Health Monitor</h2>
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div class="slider round"></div>
-            </label>
+        
+        <div class="header-controls">
+            <div id="deviceStatus" class="status-indicator offline">Offline</div>
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
         </div>
     </header>
+    
     <div class="main-grid">
         <div class="card">
             <h3><i class="fas fa-heartbeat"></i>Brick Health</h3>
@@ -269,7 +290,7 @@
         </div>
 
         <div class="card">
-            <h3><i class="fas fa-tachometer-alt"></i>Stress Level(in mV)</h3>
+            <h3><i class="fas fa-tachometer-alt"></i>Stress Level</h3>
             <p><span id="stressLevel">--</span><span class="unit">mV</span></p>
         </div>
         
@@ -314,6 +335,7 @@
     const API_URL = 'https://my-brick-project.onrender.com/api/data';
     const MAX_CHART_POINTS = 20;
 
+    // --- Chart setup is unchanged ---
     const createChart = (ctx, label) => new Chart(ctx, {
         type: 'line',
         data: {
@@ -361,42 +383,77 @@
         chart.update();
     };
 
+    // --- MODIFIED: Entire fetchData function ---
     async function fetchData() {
         try {
             const response = await fetch(API_URL);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const apiResponse = await response.json();
             
+            // Get all data from the server
+            const isOnline = apiResponse.isOnline;
             const data = apiResponse.latestSensorData;
             const logs = apiResponse.eventLog;
 
-            if (!data || Object.keys(data).length === 0) return;
+            // 1. Update the status indicator
+            const statusIndicator = document.getElementById('deviceStatus');
+            const statusIconOffline = '<i class="fas fa-minus-circle"></i> Offline';
+            const statusIconDefault = '--';
             
-            document.getElementById('health').textContent = data.health?.toFixed(1) || '--';
-            document.getElementById('stressLevel').textContent = data.voltage?.toFixed(2) || '--'; 
-            document.getElementById('surfaceTemp').textContent = data.surfaceTemp?.toFixed(2) || '--';
-            document.getElementById('innerTemp').textContent = data.innerTemp?.toFixed(2) || '--';
+            if (isOnline) {
+                statusIndicator.textContent = 'Online';
+                statusIndicator.className = 'status-indicator online';
+            } else {
+                statusIndicator.textContent = 'Offline';
+                statusIndicator.className = 'status-indicator offline';
+            }
 
-            const earthquakeCard = document.getElementById('earthquakeCard');
-            const earthquakeAlertP = document.getElementById('earthquakeAlert');
-            earthquakeAlertP.innerHTML = data.earthquakeAlert 
-                ? '<i class="fas fa-exclamation-triangle"></i> YES!' 
-                : '<i class="fas fa-check-circle"></i> NO';
-            earthquakeCard.classList.toggle('alert', data.earthquakeAlert);
-            earthquakeCard.classList.toggle('pulse', data.earthquakeAlert); 
+            // 2. Update all cards and charts ONLY IF online
+            if (isOnline && data && Object.keys(data).length > 0) {
+                // Update cards with data
+                document.getElementById('health').textContent = data.health?.toFixed(1) || '--';
+                document.getElementById('stressLevel').textContent = data.voltage?.toFixed(2) || '--'; 
+                document.getElementById('surfaceTemp').textContent = data.surfaceTemp?.toFixed(2) || '--';
+                document.getElementById('innerTemp').textContent = data.innerTemp?.toFixed(2) || '--';
 
-            const weakBrickCard = document.getElementById('weakBrickCard');
-            const weakBrickWarningP = document.getElementById('weakBrickWarning');
-            weakBrickWarningP.innerHTML = data.weakBrickWarning 
-                ? '<i class="fas fa-exclamation-circle"></i> YES' 
-                : '<i class="fas fa-check-circle"></i> NO';
-            weakBrickCard.classList.toggle('warning', data.weakBrickWarning);
-            weakBrickCard.classList.toggle('pulse', data.weakBrickWarning); 
+                // Update earthquake alert
+                const earthquakeCard = document.getElementById('earthquakeCard');
+                const earthquakeAlertP = document.getElementById('earthquakeAlert');
+                earthquakeAlertP.innerHTML = data.earthquakeAlert 
+                    ? '<i class="fas fa-exclamation-triangle"></i> YES!' 
+                    : '<i class="fas fa-check-circle"></i> NO';
+                earthquakeCard.classList.toggle('alert', data.earthquakeAlert);
+                earthquakeCard.classList.toggle('pulse', data.earthquakeAlert); 
+
+                // Update weak brick alert
+                const weakBrickCard = document.getElementById('weakBrickCard');
+                const weakBrickWarningP = document.getElementById('weakBrickWarning');
+                weakBrickWarningP.innerHTML = data.weakBrickWarning 
+                    ? '<i class="fas fa-exclamation-circle"></i> YES' 
+                    : '<i class="fas fa-check-circle"></i> NO';
+                weakBrickCard.classList.toggle('warning', data.weakBrickWarning);
+                weakBrickCard.classList.toggle('pulse', data.weakBrickWarning); 
+                
+                // Update charts with data
+                const timestamp = new Date().toLocaleTimeString();
+                updateChart(tempChart, timestamp, data.surfaceTemp, data.innerTemp);
+                updateChart(accelChart, timestamp, data.accelX, data.accelY, data.accelZ);
             
-            const timestamp = new Date().toLocaleTimeString();
-            updateChart(tempChart, timestamp, data.surfaceTemp, data.innerTemp);
-            updateChart(accelChart, timestamp, data.accelX, data.accelY, data.accelZ);
+            } else if (!isOnline) {
+                // Device is OFFLINE. Show no data.
+                document.getElementById('health').textContent = statusIconDefault;
+                document.getElementById('stressLevel').textContent = statusIconDefault; 
+                document.getElementById('surfaceTemp').textContent = statusIconDefault;
+                document.getElementById('innerTemp').textContent = statusIconDefault;
+                document.getElementById('earthquakeAlert').innerHTML = statusIconOffline;
+                document.getElementById('weakBrickWarning').innerHTML = statusIconOffline;
+                
+                // Clear pulsing animations if they were left on
+                document.getElementById('earthquakeCard').classList.remove('alert', 'pulse');
+                document.getElementById('weakBrickCard').classList.remove('warning', 'pulse');
+            }
 
+            // 3. Always update the event log (we want to see history)
             const logBox = document.getElementById('log-box');
             logBox.innerHTML = '';
             if (logs && logs.length > 0) {
@@ -412,9 +469,15 @@
 
         } catch (error) {
             console.error('Failed to fetch sensor data:', error);
+            
+            // If fetch fails, also show offline
+            const statusIndicator = document.getElementById('deviceStatus');
+            statusIndicator.textContent = 'Offline';
+            statusIndicator.className = 'status-indicator offline';
         }
     }
 
+    // --- Theme Switcher logic is unchanged ---
     const themeToggle = document.getElementById('checkbox');
     const currentTheme = localStorage.getItem('theme');
 
@@ -432,7 +495,6 @@
         });
     }
 
-    // Initial load theme application
     if (currentTheme) {
         document.body.classList.add(currentTheme);
         if (currentTheme === 'dark-mode') {
