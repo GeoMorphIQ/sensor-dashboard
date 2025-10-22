@@ -383,7 +383,7 @@
         chart.update();
     };
 
-    // --- MODIFIED: Entire fetchData function ---
+// --- CORRECTED fetchData function ---
     async function fetchData() {
         try {
             const response = await fetch(API_URL);
@@ -432,7 +432,7 @@
                     ? '<i class="fas fa-exclamation-circle"></i> YES' 
                     : '<i class="fas fa-check-circle"></i> NO';
                 weakBrickCard.classList.toggle('warning', data.weakBrickWarning);
-                weakBrickCard.classList.toggle('pulse', data.weakBrickWarning); 
+                weakBrickCard.classList.toggle('pulse', data.weakBrickWarning); // <-- TYPO "s" REMOVED
                 
                 // Update charts with data
                 const timestamp = new Date().toLocaleTimeString();
@@ -476,7 +476,6 @@
             statusIndicator.className = 'status-indicator offline';
         }
     }
-
     // --- Theme Switcher logic is unchanged ---
     const themeToggle = document.getElementById('checkbox');
     const currentTheme = localStorage.getItem('theme');
